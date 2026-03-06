@@ -1,0 +1,79 @@
+services:
+
+  # ── Landing Page ────────────────────────────────────────────────────────────
+  landing:
+    build:
+      context: ./landing
+    container_name: landing_page
+    ports:
+      - "8500:8501"
+    environment:
+      - URL_BASIC=${HOST_URL:-http://localhost}:8501
+      - URL_INTERMEDIATE=${HOST_URL:-http://localhost}:8502
+      - URL_ADVANCED=${HOST_URL:-http://localhost}:8503
+    restart: unless-stopped
+
+  # ── 01 Basic Agent ──────────────────────────────────────────────────────────
+  api1:
+    build:
+      context: ./01_basic_agent/api
+    container_name: basic_agent_api
+    env_file:
+      - ./01_basic_agent/.env
+    restart: unless-stopped
+
+  ui1:
+    build:
+      context: ./01_basic_agent/ui
+    container_name: basic_agent_ui
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api1:8000
+    depends_on:
+      - api1
+    restart: unless-stopped
+
+  # ── 02 Intermediate Agent ────────────────────────────────────────────────────
+  api2:
+    build:
+      context: ./02_intermediate_agent/api
+    container_name: intermediate_agent_api
+    env_file:
+      - ./02_intermediate_agent/.env
+    restart: unless-stopped
+
+  ui2:
+    build:
+      context: ./02_intermediate_agent/ui
+    container_name: intermediate_agent_ui
+    ports:
+      - "8502:8501"
+    environment:
+      - API_URL=http://api2:8000
+    depends_on:
+      - api2
+    restart: unless-stopped
+
+  # ── 03 Advanced Agent ────────────────────────────────────────────────────────
+  api3:
+    build:
+      context: ./03_advanced_agent/api
+    container_name: advanced_agent_api
+    env_file:
+      - ./03_advanced_agent/.env
+    volumes:
+      - ./03_advanced_agent/data:/app/data
+    restart: unless-stopped
+
+  ui3:
+    build:
+      context: ./03_advanced_agent/ui
+    container_name: advanced_agent_ui
+    ports:
+      - "8503:8501"
+    environment:
+      - API_URL=http://api3:8000
+    depends_on:
+      - api3
+    restart: unless-stopped
