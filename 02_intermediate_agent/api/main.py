@@ -28,7 +28,12 @@ class AnalyzeResponse(BaseModel):
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    import os
+    return {
+        "status": "ok",
+        "has_openai_key": bool(os.getenv("OPENAI_API_KEY")),
+        "llm_model": os.getenv("LLM_MODEL", "NOT SET"),
+    }
 
 
 @app.post("/analyze", response_model=AnalyzeResponse)
