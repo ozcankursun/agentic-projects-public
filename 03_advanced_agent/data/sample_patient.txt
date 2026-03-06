@@ -1,0 +1,14 @@
+Patient: 58-year-old female
+Chief complaint: fatigue, weight gain, cold intolerance
+
+History: 6-month history of progressive fatigue, 8 kg weight gain, constipation,
+cold intolerance, and dry skin. No chest pain or dyspnea.
+
+Past medical history: hypertension, hyperlipidemia
+
+Medications: atorvastatin 40 MG Oral, lisinopril 10 MG Oral
+
+Exam: HR 58, BP 138/88, BMI 31. Skin dry, hair brittle, delayed reflexes.
+Thyroid: diffusely enlarged, non-tender.
+
+Labs: TSH 18.4 mIU/L (elevated), Free T4 0.5 ng/dL (low), Total cholesterol 268 mg/dL
