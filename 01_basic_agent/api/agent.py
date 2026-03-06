@@ -9,12 +9,16 @@ from langgraph.graph import END, StateGraph
 MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 
 
+MAX_ITERATIONS = 3
+
+
 class AgentState(TypedDict):
     input_text: str
     messages: Annotated[list[str], operator.add]
     draft: str
     feedback: str
     is_approved: bool
+    iteration: int
 
 
 def generator_node(state: AgentState) -> dict:
@@ -60,7 +64,7 @@ def generator_node(state: AgentState) -> dict:
     label = "Revised draft produced" if feedback else "Initial draft produced"
     print(f"   draft (ilk 100 karakter): {draft[:100]}...")
     print("="*50)
-    return {"draft": draft, "messages": [f"[GENERATOR]: {label}."]}
+    return {"draft": draft, "messages": [f"[GENERATOR]: {label}."], "iteration": state.get("iteration", 0) + 1}
 
 
 def critic_node(state: AgentState) -> dict:
@@ -70,18 +74,21 @@ def critic_node(state: AgentState) -> dict:
 
     prompt = (
         "You are a medical safety reviewer. Evaluate this medical summary strictly on ONE rule:\n\n"
-        "REJECT if the summary contains an EXPLICIT DIAGNOSIS statement such as:\n"
-        "- 'the patient has [disease name]'\n"
+        "REJECT ONLY if the summary contains a NEW DIAGNOSIS conclusion such as:\n"
+        "- 'the patient has [acute/active disease name]' (e.g. 'the patient has STEMI')\n"
         "- 'this is consistent with [disease name]'\n"
         "- 'findings confirm [disease name]'\n"
         "- 'presenting with [disease name]'\n\n"
-        "APPROVE if the summary only describes symptoms, vitals, lab values, and clinical observations "
-        "WITHOUT naming a specific diagnosis.\n\n"
+        "APPROVE if the summary:\n"
+        "- Only describes current symptoms, vitals, lab values, and clinical observations\n"
+        "- Mentions past medical history (e.g. 'history of hypertension', 'known diabetes mellitus') — this is ALLOWED\n"
+        "- Lists current medications — this is ALLOWED\n"
+        "- Does NOT state a new diagnosis conclusion\n\n"
         f"Medical summary to evaluate:\n{draft}\n\n"
         "Respond with ONLY valid JSON:\n"
         '{"is_approved": true, "feedback": ""}\n'
         "OR\n"
-        '{"is_approved": false, "feedback": "Quote the exact diagnosis phrase and instruct to remove it"}'
+        '{"is_approved": false, "feedback": "Quote the exact new diagnosis phrase and instruct to remove it"}'
     )
 
     response = litellm.completion(
@@ -112,6 +119,9 @@ def critic_node(state: AgentState) -> dict:
 def should_continue(state: AgentState) -> str:
     if state.get("is_approved", False):
         print("\n🏁 KARAR: Workflow bitti → END")
+        return END
+    if state.get("iteration", 0) >= MAX_ITERATIONS:
+        print(f"\n🏁 KARAR: Max iterasyon ({MAX_ITERATIONS}) doldu → END")
         return END
     print("\n🔄 KARAR: Geri dönüyor → GENERATOR")
     return "generator"
@@ -144,6 +154,7 @@ def run_agent(input_text: str) -> dict:
         "draft": "",
         "feedback": "",
         "is_approved": False,
+        "iteration": 0,
     }
 
     # 5 iterations × 2 nodes = 10 steps; set limit to 12 for safety
