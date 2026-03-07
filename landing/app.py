@@ -146,8 +146,7 @@ st.markdown(
     font-size: 0.92rem;
     color: #6b7280;
     line-height: 1.65;
-    margin-bottom: 22px;
-    flex: 1;
+    margin-bottom: 16px;
 }}
 .arch-block {{
     background: #f8fafc;
@@ -161,7 +160,6 @@ st.markdown(
     white-space: pre;
     overflow-x: auto;
     margin-bottom: 22px;
-    flex: 1;
 }}
 .open-btn {{
     display: block;
