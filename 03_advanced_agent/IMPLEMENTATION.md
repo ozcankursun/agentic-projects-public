@@ -90,15 +90,15 @@ streamlit>=1.32.0
 requests>=2.31.0
 ```
 
-**External dependencies:** Python 3.11+, Docker & Docker Compose, OpenAI API key
+**External dependencies:** Python 3.11+, Docker & Docker Compose, Groq API key (free at console.groq.com)
 
 ---
 
 ## Environment File (`.env`)
 
 ```env
-OPENAI_API_KEY=sk-...
-LLM_MODEL=gpt-4o-mini
+GROQ_API_KEY=gsk_...
+LLM_MODEL=groq/llama-3.3-70b-versatile
 ```
 
 ---

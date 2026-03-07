@@ -1,12 +1,13 @@
 import json
 import operator
 import os
+import re
 from typing import Annotated, TypedDict
 
 import litellm
 from langgraph.graph import END, StateGraph
 
-MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+MODEL = os.getenv("LLM_MODEL", "groq/llama-3.3-70b-versatile")
 
 
 MAX_ITERATIONS = 3
@@ -95,11 +96,12 @@ def critic_node(state: AgentState) -> dict:
         model=MODEL,
         messages=[{"role": "user", "content": prompt}],
         temperature=0.0,
-        response_format={"type": "json_object"},
     )
 
     raw = response.choices[0].message.content.strip()
-    result = json.loads(raw)
+    # Extract JSON from response (works with and without response_format support)
+    match = re.search(r'\{.*\}', raw, re.DOTALL)
+    result = json.loads(match.group()) if match else {"is_approved": False, "feedback": raw}
 
     is_approved = bool(result.get("is_approved", False))
     feedback = result.get("feedback", "")

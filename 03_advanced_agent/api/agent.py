@@ -10,7 +10,7 @@ from langgraph.graph import END, StateGraph
 
 from tools import format_soap_template, get_icd10_code
 
-MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+MODEL = os.getenv("LLM_MODEL", "groq/llama-3.3-70b-versatile")
 
 
 # ---------------------------------------------------------------------------

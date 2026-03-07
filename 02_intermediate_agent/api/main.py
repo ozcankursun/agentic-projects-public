@@ -31,7 +31,7 @@ def health():
     import os
     return {
         "status": "ok",
-        "has_openai_key": bool(os.getenv("OPENAI_API_KEY")),
+        "has_groq_key": bool(os.getenv("GROQ_API_KEY")),
         "llm_model": os.getenv("LLM_MODEL", "NOT SET"),
     }
 

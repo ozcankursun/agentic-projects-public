@@ -8,7 +8,7 @@ import litellm
 from langgraph.graph import END, StateGraph
 from langgraph.types import Send
 
-MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+MODEL = os.getenv("LLM_MODEL", "groq/llama-3.3-70b-versatile")
 
 # ---------------------------------------------------------------------------
 # Specialist Registry — 20 specialists
