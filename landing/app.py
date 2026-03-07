@@ -5,7 +5,7 @@ import streamlit as st
 st.set_page_config(
     page_title="AI Medical Agent Portfolio",
     page_icon="🧠",
-    layout="centered",
+    layout="wide",
 )
 
 URL1 = os.getenv("URL_BASIC", "http://localhost:8501")
@@ -43,27 +43,26 @@ with col1:
         "Critic reviews it. Loop repeats until approved."
     )
     st.link_button("Open App", URL1, use_container_width=True)
-    with st.expander("Architecture"):
-        st.code(
-            "User Input\n"
-            "     │\n"
-            "     ▼\n"
-            "┌─────────────┐\n"
-            "│  Generator  │ ◄──────────┐\n"
-            "│ Drafts      │            │ rejected\n"
-            "│ summary     │            │\n"
-            "└──────┬──────┘            │\n"
-            "       ▼                   │\n"
-            "┌─────────────┐            │\n"
-            "│   Critic    │ ───────────┘\n"
-            "│ Reviews for │\n"
-            "│ accuracy    │\n"
-            "└──────┬──────┘\n"
-            "       │ approved\n"
-            "       ▼\n"
-            "  Final Summary",
-            language=None,
-        )
+    st.code(
+        "User Input\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│  Generator  │ ◄──────────┐\n"
+        "│ Drafts      │            │ rejected\n"
+        "│ summary     │            │\n"
+        "└──────┬──────┘            │\n"
+        "       ▼                   │\n"
+        "┌─────────────┐            │\n"
+        "│   Critic    │ ───────────┘\n"
+        "│ Reviews for │\n"
+        "│ accuracy    │\n"
+        "└──────┬──────┘\n"
+        "       │ approved\n"
+        "       ▼\n"
+        "  Final Summary",
+        language=None,
+    )
 
 with col2:
     st.subheader("02 — Intermediate Agent")
@@ -73,29 +72,28 @@ with col2:
         "running in parallel. Aggregator synthesizes results."
     )
     st.link_button("Open App", URL2, use_container_width=True)
-    with st.expander("Architecture"):
-        st.code(
-            "User Input\n"
-            "     │\n"
-            "     ▼\n"
-            "┌─────────────┐\n"
-            "│  Supervisor │\n"
-            "│ Selects     │\n"
-            "│ specialists │\n"
-            "└──────┬──────┘\n"
-            "  ┌────┼────┐\n"
-            "  ▼    ▼    ▼\n"
-            " [S1] [S2] [S3] ← parallel\n"
-            "  └────┬────┘\n"
-            "       ▼\n"
-            "┌─────────────┐\n"
-            "│  Aggregator │\n"
-            "│ Synthesizes │\n"
-            "└──────┬──────┘\n"
-            "       ▼\n"
-            "  Final Summary",
-            language=None,
-        )
+    st.code(
+        "User Input\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│  Supervisor │\n"
+        "│ Selects     │\n"
+        "│ specialists │\n"
+        "└──────┬──────┘\n"
+        "  ┌────┼────┐\n"
+        "  ▼    ▼    ▼\n"
+        " [S1] [S2] [S3] ← parallel\n"
+        "  └────┬────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│  Aggregator │\n"
+        "│ Synthesizes │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "  Final Summary",
+        language=None,
+    )
 
 with col3:
     st.subheader("03 — Advanced Agent")
@@ -105,35 +103,34 @@ with col3:
         "draft SOAP note, pause for clinician review."
     )
     st.link_button("Open App", URL3, use_container_width=True)
-    with st.expander("Architecture"):
-        st.code(
-            "Clinical Document\n"
-            "     │\n"
-            "     ▼\n"
-            "┌─────────────┐\n"
-            "│   Extract   │\n"
-            "│   Entities  │\n"
-            "└──────┬──────┘\n"
-            "       ▼\n"
-            "┌─────────────┐\n"
-            "│ Assign ICD  │\n"
-            "│   Codes     │\n"
-            "└──────┬──────┘\n"
-            "       ▼\n"
-            "┌─────────────┐\n"
-            "│ Draft SOAP  │\n"
-            "│    Note     │\n"
-            "└──────┬──────┘\n"
-            "       ▼\n"
-            "┌─────────────┐\n"
-            "│ ⏸ Human    │\n"
-            "│   Review    │\n"
-            "└──────┬──────┘\n"
-            "       │ approved\n"
-            "       ▼\n"
-            "  Final SOAP Note",
-            language=None,
-        )
+    st.code(
+        "Clinical Document\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│   Extract   │\n"
+        "│   Entities  │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ Assign ICD  │\n"
+        "│   Codes     │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ Draft SOAP  │\n"
+        "│    Note     │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ ⏸ Human    │\n"
+        "│   Review    │\n"
+        "└──────┬──────┘\n"
+        "       │ approved\n"
+        "       ▼\n"
+        "  Final SOAP Note",
+        language=None,
+    )
 
 st.divider()
 st.caption("Powered by LangGraph · LiteLLM · FastAPI · Streamlit")
