@@ -15,6 +15,18 @@ st.markdown(
     "The agent will draft a professional medical summary and refine it until the Critic approves."
 )
 
+with st.expander("📋 Try an example — expand and copy"):
+    st.code(
+        "Patient: Maria Santos, 52F\n"
+        "Chief complaint: sudden severe headache (10/10), worst of her life, onset during exercise.\n"
+        "Associated symptoms: nausea, neck stiffness, photophobia. No fever.\n"
+        "Vitals: BP 162/94, HR 88, Temp 37.1°C, SpO2 99%.\n"
+        "Neuro exam: alert but distressed, Kernig sign positive.\n"
+        "CT head: negative for hemorrhage.\n"
+        "CSF: xanthochromic, RBC 15,000, protein 95 mg/dL, glucose 42 mg/dL, opening pressure 28 cmH2O.",
+        language=None,
+    )
+
 patient_input = st.text_area(
     "Patient Description",
     height=200,

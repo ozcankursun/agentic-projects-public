@@ -28,6 +28,19 @@ with st.sidebar:
     st.caption(f"Selected: **{top_k}** specialist(s) will analyze the case in parallel.")
 
 # Main input
+with st.expander("📋 Try an example — expand and copy"):
+    st.code(
+        "Patient: James Okafor, 68M\n"
+        "Chief complaint: 2-week progressive shortness of breath, bilateral leg swelling, orthopnea (3 pillows).\n"
+        "History: hypertension, type 2 diabetes, prior MI (2019).\n"
+        "Medications: metformin, amlodipine, aspirin.\n"
+        "Vitals: BP 155/96, HR 102, RR 22, SpO2 91% on room air.\n"
+        "Exam: JVD present, bilateral crackles, 2+ pitting edema to knees.\n"
+        "Labs: BNP 1,450 pg/mL, troponin 0.02, Cr 1.6, Na 131.\n"
+        "ECG: LBBB. CXR: cardiomegaly, bilateral pulmonary congestion.",
+        language=None,
+    )
+
 case_input = st.text_area(
     "Medical Case Description",
     height=220,

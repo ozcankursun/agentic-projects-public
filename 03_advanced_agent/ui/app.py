@@ -38,6 +38,20 @@ if "final_soap" not in st.session_state:
 if st.session_state.workflow_status == "idle":
     st.subheader("Upload or select a clinical document")
 
+    with st.expander("📋 Try an example — copy text below, save as patient.txt, then upload"):
+        st.code(
+            "Patient: Linda Kowalski, 61F\n"
+            "Chief complaint: 3-day history of worsening chest pain, radiating to left arm, associated diaphoresis.\n"
+            "History: hypertension, hyperlipidemia, family history of CAD (father MI at 58).\n"
+            "Medications: atorvastatin 40mg, lisinopril 10mg, aspirin 81mg.\n"
+            "Vitals: BP 148/90, HR 96, RR 18, Temp 37.0°C, SpO2 97%.\n"
+            "Exam: mild diaphoresis, S4 gallop, no rales, no JVD.\n"
+            "Labs: troponin-I 1.8 ng/mL (elevated), BNP 210, CK-MB 28.\n"
+            "ECG: ST depression 1mm in leads V4-V6, T-wave inversion V5-V6.\n"
+            "CXR: mild cardiomegaly, no pulmonary edema.",
+            language=None,
+        )
+
     mode = st.radio("Input mode", ["Upload file(s)", "Select from storage"], horizontal=True)
 
     if mode == "Upload file(s)":
