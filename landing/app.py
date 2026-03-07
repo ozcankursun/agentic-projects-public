@@ -12,6 +12,22 @@ URL1 = os.getenv("URL_BASIC", "http://localhost:8501")
 URL2 = os.getenv("URL_INTERMEDIATE", "http://localhost:8502")
 URL3 = os.getenv("URL_ADVANCED", "http://localhost:8503")
 
+st.markdown(
+    """
+    <style>
+    [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] > div:first-child {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    [data-testid="stHorizontalBlock"] > [data-testid="stColumn"] > div:first-child > div:last-child {
+        margin-top: auto;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 st.title("🧠 AI Medical Agent Portfolio")
 st.caption("Three agentic AI systems built with LangGraph + LiteLLM")
 
