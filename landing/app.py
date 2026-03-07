@@ -63,4 +63,102 @@ with col3:
     st.link_button("Open App", URL3, use_container_width=True)
 
 st.divider()
+st.subheader("Architecture Overview")
+
+arch1, arch2, arch3 = st.columns(3)
+
+with arch1:
+    st.markdown("**01 — Reflection Loop**")
+    st.code(
+        "User Input\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│  Generator  │ ◄──────────┐\n"
+        "│             │            │\n"
+        "│ Drafts a    │            │\n"
+        "│ medical     │            │ rejected\n"
+        "│ summary     │            │\n"
+        "└──────┬──────┘            │\n"
+        "       │                   │\n"
+        "       ▼                   │\n"
+        "┌─────────────┐            │\n"
+        "│   Critic    │ ───────────┘\n"
+        "│             │\n"
+        "│ Reviews for │\n"
+        "│ accuracy &  │\n"
+        "│ completeness│\n"
+        "└──────┬──────┘\n"
+        "       │ approved\n"
+        "       ▼\n"
+        "  Final Summary",
+        language=None,
+    )
+
+with arch2:
+    st.markdown("**02 — Parallel Specialists**")
+    st.code(
+        "User Input\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│  Supervisor │\n"
+        "│             │\n"
+        "│ Selects most│\n"
+        "│ relevant    │\n"
+        "│ specialists │\n"
+        "└──────┬──────┘\n"
+        "       │\n"
+        "  ┌────┼────┐\n"
+        "  ▼    ▼    ▼\n"
+        " [S1] [S2] [S3]  ← parallel\n"
+        "  └────┬────┘\n"
+        "       │\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│  Aggregator │\n"
+        "│             │\n"
+        "│ Synthesizes │\n"
+        "│ all results │\n"
+        "└──────┬──────┘\n"
+        "       │\n"
+        "       ▼\n"
+        "  Final Summary",
+        language=None,
+    )
+
+with arch3:
+    st.markdown("**03 — Pipeline + Human Review**")
+    st.code(
+        "Clinical Document\n"
+        "     │\n"
+        "     ▼\n"
+        "┌─────────────┐\n"
+        "│   Extract   │\n"
+        "│   Entities  │ conditions,\n"
+        "│             │ medications\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ Assign ICD  │\n"
+        "│   Codes     │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ Draft SOAP  │\n"
+        "│    Note     │\n"
+        "└──────┬──────┘\n"
+        "       ▼\n"
+        "┌─────────────┐\n"
+        "│ ⏸ Human    │\n"
+        "│   Review    │ ← clinician\n"
+        "│             │   edits here\n"
+        "└──────┬──────┘\n"
+        "       │ approved\n"
+        "       ▼\n"
+        "  Final SOAP Note",
+        language=None,
+    )
+
+st.divider()
 st.caption("Powered by LangGraph · LiteLLM · FastAPI · Streamlit")
