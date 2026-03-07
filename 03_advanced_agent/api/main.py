@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import PyPDF2
-from fastapi import FastAPI, HTTPException, UploadFile
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from agent import start_workflow, update_workflow_and_resume
@@ -90,7 +90,7 @@ def list_files():
 
 
 @app.post("/upload", response_model=WorkflowResponse)
-async def upload(files: list[UploadFile]):
+async def upload(files: list[UploadFile] = File(...)):
     if not files:
         raise HTTPException(status_code=400, detail="No files provided.")
 
