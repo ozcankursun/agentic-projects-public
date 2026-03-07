@@ -184,6 +184,14 @@ st.markdown(
     padding: 20px 0;
     border-top: 1px solid #f0f0f0;
 }}
+@media (max-width: 768px) {{
+    .cards-grid {{
+        grid-template-columns: 1fr;
+    }}
+    .portfolio-header h1 {{
+        font-size: 1.8rem;
+    }}
+}}
 </style>
 
 <div class="portfolio-header">
