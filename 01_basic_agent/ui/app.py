@@ -17,13 +17,14 @@ st.markdown(
 
 with st.expander("📋 Try an example — expand and copy"):
     st.code(
-        "Patient: Maria Santos, 52F\n"
-        "Chief complaint: sudden severe headache (10/10), worst of her life, onset during exercise.\n"
-        "Associated symptoms: nausea, neck stiffness, photophobia. No fever.\n"
-        "Vitals: BP 162/94, HR 88, Temp 37.1°C, SpO2 99%.\n"
-        "Neuro exam: alert but distressed, Kernig sign positive.\n"
-        "CT head: negative for hemorrhage.\n"
-        "CSF: xanthochromic, RBC 15,000, protein 95 mg/dL, glucose 42 mg/dL, opening pressure 28 cmH2O.",
+        "Patient: Emre, 19M, known Type 1 diabetic.\n"
+        "Chief complaint: nausea, vomiting, abdominal pain, confusion for 6 hours.\n"
+        "History: ran out of insulin 2 days ago.\n"
+        "Vitals: BP 98/62, HR 118, RR 28 (deep, labored breathing), Temp 37.8°C.\n"
+        "Labs: Glucose 487 mg/dL, pH 7.17, HCO3 7 mEq/L, pCO2 18 mmHg.\n"
+        "Urine ketones: strongly positive (4+). Serum ketones: positive.\n"
+        "Anion gap: 28 (elevated).\n"
+        "Na 131, K 5.8, Cr 1.4.",
         language=None,
     )
 
