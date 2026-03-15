@@ -70,25 +70,31 @@ def generator_node(state: AgentState) -> dict:
 def critic_node(state: AgentState) -> dict:
     print("\n" + "="*50)
     print("▶ NODE: CRITIC")
+    input_text = state["input_text"]
     draft = state["draft"]
 
     prompt = (
-        "You are a medical safety reviewer. Evaluate this medical summary strictly on ONE rule:\n\n"
-        "REJECT ONLY if the summary contains a NEW DIAGNOSIS conclusion such as:\n"
-        "- 'the patient has [acute/active disease name]' (e.g. 'the patient has STEMI')\n"
-        "- 'this is consistent with [disease name]'\n"
-        "- 'findings confirm [disease name]'\n"
-        "- 'presenting with [disease name]'\n\n"
-        "APPROVE if the summary:\n"
-        "- Only describes current symptoms, vitals, lab values, and clinical observations\n"
-        "- Mentions past medical history (e.g. 'history of hypertension', 'known diabetes mellitus') — this is ALLOWED\n"
-        "- Lists current medications — this is ALLOWED\n"
-        "- Does NOT state a new diagnosis conclusion\n\n"
+        "You are a medical safety and accuracy reviewer. Evaluate the summary against TWO criteria:\n\n"
+        "REJECT if ANY of these are true:\n\n"
+        "1. SAFETY — The summary states a new diagnosis conclusion such as:\n"
+        "   - 'the patient has [disease name]' (e.g. 'the patient has STEMI')\n"
+        "   - 'this is consistent with [disease name]'\n"
+        "   - 'findings confirm [disease name]'\n"
+        "   - 'presenting with [disease name]'\n\n"
+        "2. ACCURACY — The summary:\n"
+        "   - Omits important clinical findings present in the original patient information\n"
+        "   - Adds information not present in the original patient data\n"
+        "   - Misrepresents any vital signs, lab values, or symptoms\n\n"
+        "APPROVE only if the summary:\n"
+        "- Accurately reflects all key findings from the original patient information\n"
+        "- Uses objective clinical language without stating a new diagnosis\n"
+        "- Mentions past medical history and medications (these are allowed)\n\n"
+        f"Original patient information:\n{input_text}\n\n"
         f"Medical summary to evaluate:\n{draft}\n\n"
         "Respond with ONLY valid JSON:\n"
         '{"is_approved": true, "feedback": ""}\n'
         "OR\n"
-        '{"is_approved": false, "feedback": "Quote the exact new diagnosis phrase and instruct to remove it"}'
+        '{"is_approved": false, "feedback": "State which rule (SAFETY or ACCURACY) was violated and what must be fixed"}'
     )
 
     response = litellm.completion(
