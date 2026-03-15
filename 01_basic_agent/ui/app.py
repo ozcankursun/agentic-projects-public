@@ -37,7 +37,10 @@ patient_input = st.text_area(
     ),
 )
 
-if st.button("Analyze with Agent", type="primary", disabled=not patient_input.strip()):
+if st.button("Analyze with Agent", type="primary"):
+    if not patient_input.strip():
+        st.warning("Please enter patient information before analyzing.")
+        st.stop()
     with st.spinner("Agent is thinking… (Generator → Critic loop running)"):
         try:
             response = requests.post(

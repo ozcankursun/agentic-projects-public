@@ -51,7 +51,10 @@ case_input = st.text_area(
     ),
 )
 
-if st.button("Analyze with Specialists", type="primary", disabled=not case_input.strip()):
+if st.button("Analyze with Specialists", type="primary"):
+    if not case_input.strip():
+        st.warning("Please enter a medical case description before analyzing.")
+        st.stop()
     with st.spinner(f"Supervisor selecting {top_k} specialist(s) and running parallel analysis…"):
         try:
             response = requests.post(
